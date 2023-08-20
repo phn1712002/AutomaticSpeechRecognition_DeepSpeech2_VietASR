@@ -1,0 +1,54 @@
+{
+    "config_model":{
+        "name": "DeepSpeech2",
+        "sr": 16000,
+        "nfft": 384,
+        "stride": 160,
+        "window": 250,
+        "epsilon_normalization": 1e-10,
+        "greedy": true,
+        "beam_width": 100,
+        "top_paths": 1,
+        "cnn_layers": 1,
+        "filters": [32],
+        "kernel_size": [[11, 41]],
+        "strides": [[2,2]],
+        "padding": ["same"],
+        "rnn_layers": 1,
+        "rnn_units": 500,
+        "hidden_units": 1000,
+        "rate_drop": 0.5
+    },
+    "config_wandb":{
+        "using": false,
+        "api_key": "",
+        "project": "",
+        "name": "",
+        "sync_tensorboard": false
+    },
+    "config_other":{
+        "warning": false,
+        "summary": true
+    },
+    "config_train":{
+        "checkpoint":{
+
+        },
+        "epochs": 1
+    },
+    "config_dataset":{
+        "path_vocab": "./Dataset/raw/vocabulary.json",
+        "batch_size_train": 8,
+        "batch_size_dev": 8,
+        "augmentation": true,
+        "params_noise":{
+            "AddBackgroundNoise":{ "sounds_path": "./Dataset/raw/Noise/",  "min_snr_db": 0.5,  "max_snr_db": 2.5, "p":0.6 },
+            "AddGaussianSNR":{ "min_snr_db": 0.5, "max_snr_db": 2.5, "p": 0.2 },
+            "TanhDistortion":{ "min_distortion": 0.01, "max_distortion": 0.7, "p": 0.2 },
+            "TimeStretch":{ "min_rate": 0.5, "max_rate": 1.5, "p": 0.2 }
+        }
+    },
+    "config_opt":{
+        "learning_rate": 0.1
+    }
+}
